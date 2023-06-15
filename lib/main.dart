@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'home_screen/home_screen.dart';
 
-import 'cart_screen/view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.teal,
         ),
-        home: const CartView(),
+        home:  ChooseProduct(),
+
       ),
     );
   }
