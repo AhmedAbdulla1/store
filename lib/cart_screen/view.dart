@@ -105,15 +105,18 @@ class _CartViewState extends State<CartView> {
                 itemCount: productList.length,
               itemBuilder: (context, index) => _getItem(index),),
           ),
-          Text('Selected Item( ${selectedItem().toString()} )',
-            style: const TextStyle(
-            fontSize:26,
-            fontWeight: FontWeight.w600
-          ),),
-          const SizedBox(height: 10,),
+          StreamBuilder<bool>(
+            stream: _cartViewModel.outputCheckBox,
+            builder:(context,snapshot)=> Text('Selected Item( ${selectedItem().toString()} )',
+              style: const TextStyle(
+              fontSize:26,
+              fontWeight: FontWeight.w600
+            ),),
+          ),
+          SizedBox(height: 10.h,),
           ElevatedButton(
             onPressed: (){
-              print('checkout');
+              debugPrint('checkout');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF159954), // Set the background color
@@ -188,7 +191,7 @@ class _CartViewState extends State<CartView> {
           Row(
             children: [
               Text(
-                productList[index].price,
+                '\$ ${productList[index].price}',
                 style:const  TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
@@ -196,7 +199,7 @@ class _CartViewState extends State<CartView> {
                 ),
               ),
               SizedBox(
-                width: 40.w,
+                width: 50.w,
               ),
               GestureDetector(
                 onTap: () {
@@ -259,6 +262,7 @@ class _CartViewState extends State<CartView> {
       )
     ]);
   }
+  
   int selectedItem(){
     int selectedItem=0;
     for(int i=0 ; i<productList.length;i++){
